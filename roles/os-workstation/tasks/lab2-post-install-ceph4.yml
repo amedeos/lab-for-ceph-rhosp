@@ -1,0 +1,22 @@
+---
+- name: install ceph-common
+  package:
+    name: ceph-common
+    state: present
+
+- name: copy ceph.conf from mon01
+  shell: scp root@ceph-mon01:/etc/ceph/ceph.conf /etc/ceph/
+
+- name: copy ceph keyring from mon01
+  shell: scp root@ceph-mon01:/etc/ceph/ceph.client.admin.keyring /etc/ceph/
+
+- debug:
+    msg:
+      - "######## ceph commands to run #######"
+      - "# ceph -s"
+      - "# ceph health"
+      - "# ceph osd tree"
+      - "# ceph mon dump"
+
+- name: Pause to run commands
+  pause: prompt='Did you run the above commands??? Press return to continue. Press Ctrl+c and then "a" to abort'

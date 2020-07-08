@@ -1,0 +1,5 @@
+[rhceph-4-tools-for-rhel-8-x86_64-rpms]
+name=rhceph-4-tools-for-rhel-8-x86_64-rpms
+baseurl=http://192.0.2.253/repos/rhceph-4-tools-for-rhel-8-x86_64-rpms
+enabled=1
+gpgcheck=0

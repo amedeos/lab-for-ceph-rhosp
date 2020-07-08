@@ -1,0 +1,3 @@
+---
+ceph_mgr_docker_memory_limit: 1g
+ceph_mgr_docker_cpu_limit: 1

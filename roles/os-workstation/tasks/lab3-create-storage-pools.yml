@@ -1,0 +1,16 @@
+---
+- name: "create pool: volumes"
+  shell: ceph osd pool create volumes 32
+
+- name: "create pool: images"
+  shell: ceph osd pool create images 32
+
+- name: "create pool: vms"
+  shell: ceph osd pool create vms 32
+
+- name: "create pool: backup"
+  shell: ceph osd pool create backup 32
+
+- name: "create pool: metrics"
+  shell: ceph osd pool create metrics 32
+

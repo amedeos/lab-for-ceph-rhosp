@@ -1,0 +1,9 @@
+---
+copy_admin_key: true
+
+devices:
+  - /dev/vdb
+  - /dev/vdc
+
+ceph_osd_docker_memory_limit: 1g
+ceph_osd_docker_cpu_limit: 1

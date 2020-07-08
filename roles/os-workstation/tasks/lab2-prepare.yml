@@ -1,0 +1,41 @@
+---
+# tasks file for os-workstation
+- name: add ceph repository
+  copy:
+    src: etc/yum.repos.d/ceph.repo
+    dest: /etc/yum.repos.d/ceph.repo
+    owner: root
+    group: root
+    mode: 0644
+
+- name: install ceph-ansible
+  package:
+    name: ceph-ansible
+    state: present
+
+- name: copy ceph-nodes
+  copy:
+    src: root/ceph-nodes
+    dest: /root/ceph-nodes
+    owner: root
+    group: root
+    mode: 0644
+
+- name: copy ceph-preqs.yaml
+  copy:
+    src: root/ceph-preqs.yaml
+    dest: /root/ceph-preqs.yaml
+    owner: root
+    group: root
+    mode: 0644
+
+- name: execute playbook ceph-preqs.yaml
+  shell: ansible-playbook -i /root/ceph-nodes /root/ceph-preqs.yaml
+
+- name: copy .ssh/config
+  copy:
+    src: root/.ssh/config
+    dest: /root/.ssh/config
+    owner: root
+    group: root
+    mode: 0600

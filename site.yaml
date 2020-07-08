@@ -1,0 +1,8 @@
+---
+- name: Configure workstation
+  hosts: workstation
+  become: yes
+  gather_facts: True
+
+  roles:
+    - os-workstation

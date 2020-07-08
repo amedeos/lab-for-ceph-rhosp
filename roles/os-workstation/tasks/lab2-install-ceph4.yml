@@ -1,0 +1,83 @@
+---
+- name: copy hosts file
+  copy:
+    src: usr/share/ceph-ansible/hosts
+    dest: /usr/share/ceph-ansible/hosts
+    owner: root
+    group: root
+    mode: 0644
+
+- name: copy ansible.cfg
+  copy:
+    src: usr/share/ceph-ansible/ansible.cfg
+    dest: /usr/share/ceph-ansible/ansible.cfg
+    owner: root
+    group: root
+    mode: 0644
+
+- name: copy group_vars/all.yml
+  copy:
+    src: usr/share/ceph-ansible/group_vars/all.yml
+    dest: /usr/share/ceph-ansible/group_vars/all.yml
+    owner: root
+    group: root
+    mode: 0644
+
+- name: copy group_vars/osds.yml
+  copy:
+    src: usr/share/ceph-ansible/group_vars/osds.yml
+    dest: /usr/share/ceph-ansible/group_vars/osds.yml
+    owner: root
+    group: root
+    mode: 0644
+
+
+- name: copy group_vars/mons.yml
+  copy:
+    src: usr/share/ceph-ansible/group_vars/mons.yml
+    dest: /usr/share/ceph-ansible/group_vars/mons.yml
+    owner: root
+    group: root
+    mode: 0644
+
+- name: copy group_vars/mgrs.yml
+  copy:
+    src: usr/share/ceph-ansible/group_vars/mgrs.yml
+    dest: /usr/share/ceph-ansible/group_vars/mgrs.yml
+    owner: root
+    group: root
+    mode: 0644
+
+- name: copy group_vars/rgws.yml
+  copy:
+    src: usr/share/ceph-ansible/group_vars/rgws.yml
+    dest: /usr/share/ceph-ansible/group_vars/rgws.yml
+    owner: root
+    group: root
+    mode: 0644
+
+- name: copy remote site-docker.yml.sample
+  copy:
+    src: /usr/share/ceph-ansible/site-docker.yml.sample
+    dest: /usr/share/ceph-ansible/site-docker.yml
+    remote_src: yes
+    force: yes
+    owner: root
+    group: root
+    mode: 0644
+
+- name: install tmux
+  package:
+    name: tmux
+    state: present
+
+- debug:
+    msg:
+      - "################# RUN TMUX ##################"
+      - "# tmux"
+      - "# cd /usr/share/ceph-ansible"
+      - "# ansible-playbook site-docker.yml"
+
+
+- name: Pause to run playbook
+  pause: prompt='Did you run the above ansible playbook??? Press return to continue. Press Ctrl+c and then "a" to abort'
