@@ -16,5 +16,35 @@
 - debug:
     msg: "Found ceph fsid: {{ceph_fsid.stdout}}"
 
-- name: Pause to run playbook
-  pause: prompt='Did you run the above ansible playbook??? Press return to continue. Press Ctrl+c and then "a" to abort'
+- name: set facts for ceph-config.yaml
+  set_fact:
+    f_os_key: "{{os_key.stdout}}"
+    f_ceph_fsid: "{{ceph_fsid.stdout}}"
+
+- name: create ceph-config.yaml
+  template:
+    src: ceph-config.yaml
+    dest: /root/ceph-config.yaml
+
+- debug:
+    msg: 
+      - "#######################################"
+      - "PLEASE, trust root ssh key to stack user on undercloud.example.com"
+      - ""
+      - "ssh-copy-id stack@undercloud.example.com"
+
+- name: Pause
+  pause: prompt='Did you trust workstation root ssh key to stack user on undercloud host??? Press return to continue. Press Ctrl+c and then "a" to abort'
+
+- name: copy ceph.repo to undercloud
+  shell: scp /etc/yum.repos.d/ceph.repo stack@undercloud.example.com:/tmp/ceph.repo
+
+- name: move ceph.repo to /etc/yum.repos.d
+  shell: ssh stack@undercloud.example.com "sudo mv -f /tmp/ceph.repo /etc/yum.repos.d/"
+
+- name: install ceph-ansible
+  shell: ssh stack@undercloud.example.com "sudo dnf -y install ceph-ansible"
+
+- name: copy ceph-config to undercloud
+  shell: scp /root/ceph-config.yaml stack@undercloud.example.com:/home/stack/templates/environments
+

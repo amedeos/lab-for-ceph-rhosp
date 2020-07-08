@@ -1,0 +1,13 @@
+---
+- debug:
+    msg: 
+      - "#######################################"
+      - "run in tmux on undercloud.example.com"
+      - ""
+      - "source stackrc"
+      - "openstack overcloud node import --introspect --provide ~/nodes.json"
+
+- name: Pause
+  pause: prompt='Did you run the import on undercloud host??? Press return to continue. Press Ctrl+c and then "a" to abort'
+
+

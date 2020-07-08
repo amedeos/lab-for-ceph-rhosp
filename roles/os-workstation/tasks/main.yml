@@ -1,7 +1,8 @@
 ---
 # tasks file for os-workstation
-#- include: lab2-prepare.yml
-#- include: lab2-install-ceph4.yml
-#- include: lab2-post-install-ceph4.yml
-#- include: lab3-create-storage-pools.yml
+- include: lab2-prepare.yml
+- include: lab2-install-ceph4.yml
+- include: lab2-post-install-ceph4.yml
+- include: lab3-create-storage-pools.yml
 - include: lab3-create-environment-file.yml
+- include: lab3-prepare-nodes.yml

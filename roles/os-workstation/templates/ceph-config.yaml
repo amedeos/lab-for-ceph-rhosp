@@ -1,0 +1,4 @@
+parameter_defaults:
+  CephClientKey: {{ f_os_key }}
+  CephClusterFSID: {{ f_ceph_fsid }}
+  CephExternalMonHost: 172.18.0.240,172.18.0.241,172.18.0.242
